@@ -1,8 +1,7 @@
 import { PROMPT } from '../constants/constants';
 
 // 사용자 입력값 검증
-export default validateInput = (user, len) => {
-  const numberRangeRegex = /[^1-9]/g;
-  if (len !== 3 || len !== user.replace(numberRangeRegex, '').length)
-    throw new Error(PROMPT.error);
+export default validateInput = (user) => {
+  const numberRangeRegex = /^\d{3}$/;
+  if (!numberRangeRegex.test(user)) throw new Error(PROMPT.error);
 };

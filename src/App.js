@@ -16,7 +16,7 @@ class App {
       const user = String(
         await MissionUtils.Console.readLineAsync(PROMPT.inputNumber)
       );
-      validateInput(user, user.length);
+      validateInput(user);
       this.baseball = getBaseball(computer, user, this.baseball);
       printResult(this.baseball.ball, this.baseball.strike);
     }
