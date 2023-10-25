@@ -13,7 +13,7 @@ export default printResult = async (ball, strike) => {
       const app = new App();
       app.play();
     } else if (user === '2') return;
-    else throw new Error(PROMPT.error);
+    else throw new Error(PROMPT.error.not1Or2);
   } else if (ball === 0 && strike === 0) {
     MissionUtils.Console.print(PROMPT.nothing);
   } else {
