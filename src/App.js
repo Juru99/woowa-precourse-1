@@ -1,23 +1,41 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
+import { Console } from '@woowacourse/mission-utils';
 import { PROMPT } from './constants/constants';
 import { get3DigitRandom } from './utils/get3DigitRandom';
 import { getStrikeBall } from './utils/getSrikeBall';
-import validateInput from './utils/validateInput';
+import { validate3Digit, validateIsPlay } from './utils/validateInput';
 
-import printResult from './utils/printResult';
 class App {
-  #baseball = { ball: 0, strike: 0 };
+  #isPlay = true;
+  #isInput;
 
   async play() {
-    MissionUtils.Console.print(PROMPT.startGame);
-    const computer = get3DigitRandom();
-    while (this.#baseball.strike < 3) {
-      const user = String(
-        await MissionUtils.Console.readLineAsync(PROMPT.inputNumber)
-      );
-      validateInput(user);
-      this.#baseball = getStrikeBall(computer, user, this.#baseball);
-      printResult(this.#baseball.ball, this.#baseball.strike);
+    while (this.#isPlay) {
+      this.#isInput = true;
+      Console.print(PROMPT.startGame);
+      const computer = get3DigitRandom();
+      while (this.#isInput) {
+        const user = String(await Console.readLineAsync(PROMPT.inputNumber));
+        validate3Digit(user);
+        const baseball = getStrikeBall(computer, user);
+        await this.printResult(baseball.ball, baseball.strike);
+      }
+    }
+  }
+
+  async printResult(ball, strike) {
+    if (strike >= 3) {
+      this.#isInput = false;
+      Console.print(`3${PROMPT.strike}`);
+      Console.print(PROMPT.endGame);
+      const user = await Console.readLineAsync(PROMPT.restartOrExit);
+      this.#isPlay = validateIsPlay(user);
+    } else if (ball === 0 && strike === 0) {
+      Console.print(PROMPT.nothing);
+    } else {
+      const result = [];
+      if (ball > 0) result.push(`${ball}${PROMPT.ball}`);
+      if (strike > 0) result.push(`${strike}${PROMPT.strike}`);
+      Console.print(result.join(' '));
     }
   }
 }
