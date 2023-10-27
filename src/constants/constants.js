@@ -12,3 +12,11 @@ export const PROMPT = Object.freeze({
     not1Or2: '[ERROR] 1 또는 2가 아닙니다.',
   },
 });
+
+export const CONFIG = Object.freeze({
+  range: {
+    minNumber: 1,
+    maxNumber: 9,
+  },
+  regex: /^[1-9]{3}$/,
+});
