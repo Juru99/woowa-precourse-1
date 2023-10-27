@@ -32,9 +32,10 @@ class App {
     } else if (ball === 0 && strike === 0) {
       Console.print(PROMPT.nothing);
     } else {
-      const result = [];
-      if (ball > 0) result.push(`${ball}${PROMPT.ball}`);
-      if (strike > 0) result.push(`${strike}${PROMPT.strike}`);
+      const result = [
+        ball > 0 && `${ball}${PROMPT.ball}`,
+        strike > 0 && `${strike}${PROMPT.strike}`,
+      ];
       Console.print(result.join(' '));
     }
   }
