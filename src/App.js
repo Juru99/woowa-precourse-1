@@ -29,7 +29,7 @@ class App {
   }
 
   async printResult(ball, strike) {
-    if (strike >= 3) {
+    if (strike === 3) {
       this.#isInput = false;
 
       Console.print(`3${PROMPT.strike}`);
