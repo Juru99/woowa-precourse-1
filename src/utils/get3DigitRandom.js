@@ -7,11 +7,13 @@ import { CONFIG } from '../constants/constants';
  */
 export const get3DigitRandom = () => {
   const computer = new Set();
+
   while (computer.size < 3) {
     const number = Random.pickNumberInRange(
       CONFIG.range.minNumber,
-      CONFIG.range.maxNumber
+      CONFIG.range.maxNumber,
     );
+
     computer.add(number);
   }
 

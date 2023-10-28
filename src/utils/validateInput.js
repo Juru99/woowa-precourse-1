@@ -8,5 +8,6 @@ export const validate3Digit = (user) => {
 export const validateIsPlay = (user) => {
   if (user === '1') return true;
   if (user === '2') return false;
+
   throw new Error(PROMPT.error.not1Or2);
 };

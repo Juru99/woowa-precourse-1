@@ -11,12 +11,18 @@ class App {
   async play() {
     while (this.#isPlay) {
       this.#isInput = true;
+
       Console.print(PROMPT.startGame);
+
       const computer = get3DigitRandom();
+
       while (this.#isInput) {
         const user = String(await Console.readLineAsync(PROMPT.inputNumber));
+
         validate3Digit(user);
+
         const baseball = getStrikeBall(computer, user);
+
         await this.printResult(baseball.ball, baseball.strike);
       }
     }
@@ -25,9 +31,12 @@ class App {
   async printResult(ball, strike) {
     if (strike >= 3) {
       this.#isInput = false;
+
       Console.print(`3${PROMPT.strike}`);
       Console.print(PROMPT.endGame);
+
       const user = await Console.readLineAsync(PROMPT.restartOrExit);
+
       this.#isPlay = validateIsPlay(user);
     } else if (ball === 0 && strike === 0) {
       Console.print(PROMPT.nothing);
@@ -36,6 +45,7 @@ class App {
         ball > 0 && `${ball}${PROMPT.ball}`,
         strike > 0 && `${strike}${PROMPT.strike}`,
       ];
+
       Console.print(result.join(' '));
     }
   }
